@@ -19,6 +19,7 @@ OPENPROJECT_HTTPS = "true"
 OPENPROJECT_HOST__NAME = "57065939-3285-44e6-93a5-7472eb560e62-00-1c5qqlnoeu125.janeway.replit.dev"
 CONTROL_PLANE_DATABASE_URL = "postgresql://postgres:password@helium/control_plane_dev?sslmode=disable"
 OPENPROJECT_EE__HIDE__BANNERS = "true"
+OPENPROJECT_DEVELOPMENT__HIGHLIGHT__ENABLED = "false"
 
 [workflows]
 runButton = "Project"
