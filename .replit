@@ -1,4 +1,4 @@
-modules = ["web", "bash", "nodejs-22", "postgresql-16", "ruby-4.0"]
+modules = ["web", "bash", "nodejs-22", "ruby-4.0", "postgresql-16"]
 [agent]
 expertMode = true
 
@@ -15,6 +15,8 @@ HOST = "0.0.0.0"
 SILENCE_SQL_LOGS = "true"
 SECRET_KEY_BASE = "a_dev_secret_key_base_that_is_at_least_64_bytes_long_for_openproject_replit_setup_1234567890"
 OPENPROJECT_DISABLE_DEV_ASSET_PROXY = "true"
+OPENPROJECT_HTTPS = "true"
+OPENPROJECT_HOST__NAME = "57065939-3285-44e6-93a5-7472eb560e62-00-1c5qqlnoeu125.janeway.replit.dev"
 
 [workflows]
 runButton = "Project"

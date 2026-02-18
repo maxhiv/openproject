@@ -30,6 +30,8 @@ OpenProject is a web-based project management software built with Ruby on Rails 
 - `HOST` - 0.0.0.0
 - `SECRET_KEY_BASE` - Application secret key
 - `OPENPROJECT_DISABLE_DEV_ASSET_PROXY` - Disables Angular dev server proxy
+- `OPENPROJECT_HTTPS` - Set to "true" for Replit proxy HTTPS
+- `OPENPROJECT_HOST__NAME` - Set to Replit dev domain (double underscore maps to dot in OpenProject config)
 - `SILENCE_SQL_LOGS` - Reduces log noise
 
 ## Frontend Build
@@ -54,3 +56,8 @@ After seeding, use the default admin credentials: admin / admin
   - Configured database via DATABASE_URL
   - Enabled all hosts for Replit proxy compatibility
   - Set up deployment configuration
+- 2026-02-18: Fixed login/CSRF and host configuration
+  - Changed home_url to home_path in redirect_after_login.rb to fix OpenRedirectError
+  - Disabled CSRF origin check in development (forgery_protection_origin_check = false) for Replit proxy
+  - Set OPENPROJECT_HTTPS=true and OPENPROJECT_HOST__NAME to Replit dev domain
+  - Updated host_name and protocol settings in database
