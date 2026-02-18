@@ -1,0 +1,159 @@
+You are Replit’s senior full-stack engineer + GCP architect. I have an OpenProject prototype running on Replit, and I need you to generate the exact code + files + step-by-step commands to turn it into a 2-repo “Option 2” architecture:
+
+ARCHITECTURE (LOCKED)
+- OpenProject stays vanilla (no fork). It is only the project management foundation.
+- We build our own “Control Plane” web app that handles Firebase login, multi-tenant RBAC, ISP/MSP + construction modules, analytics, and a client portal.
+- Control Plane integrates to OpenProject using OpenProject APIs + webhooks + deep links. Clients primarily use Control Plane portal, not OpenProject UI.
+
+STACK (LOCKED, matches my prototype)
+Control Plane:
+- Ruby 4.0.0 + Rails 8.1.2
+- PostgreSQL
+- Frontend: Angular 21, compiled and served as static assets by Rails
+- Node.js 22 used only for building the frontend
+- App must listen on ENV["PORT"] (Cloud Run), but keep PORT=5000 for Replit dev
+- HTTPS is via proxy on Replit / Cloud Run termination; Rails runs HTTP internally
+
+SECURITY RULES (CRITICAL)
+- Replit proxy compatibility settings (allow all hosts, disable CSRF origin check) must be DEVELOPMENT ONLY.
+- Production/staging must:
+  - restrict hosts (domain + *.run.app optionally)
+  - enable CSRF origin check
+  - enable secure cookies
+- Never copy or reuse OpenProject Enterprise/proprietary code. If we need enterprise-like capabilities, implement ORIGINAL code in Control Plane with distinct UX/workflows.
+
+DELIVERABLES REQUIRED (COPY/PASTE READY)
+You must produce:
+1) Two GitHub-ready repos created from this Replit project output:
+   Repo A: openproject-deploy/
+   Repo B: control-plane/
+2) Each repo must include:
+   - Dockerfile
+   - docker-compose.yml (local dev)
+   - .env.example
+   - cloudbuild.yaml (GitHub -> Cloud Build -> Cloud Run)
+   - README.md with exact steps
+3) Control Plane repo must include:
+   - Rails API + auth middleware verifying Firebase ID tokens
+   - Angular app + build scripts; output copied into Rails public/app (or equivalent)
+   - DB migrations + models + controllers for multi-tenant RBAC and modules below
+   - OpenProject integration service (API client) + webhook receiver endpoints
+4) GCP deploy steps using gcloud (not Terraform required, but ok if you include optional terraform/ folder)
+5) A “Feature Mapping Matrix”:
+   - OpenProject Community vs Control Plane Custom vs Recreated (enterprise-like originals)
+6) An MVP roadmap with phases: MVP -> internal beta -> client share -> hardening
+
+CONTROL PLANE AUTH (MANDATORY)
+- Angular uses Firebase Auth (Google + email/password)
+- Angular obtains Firebase ID token, sends to Rails:
+  POST /api/session with Authorization: Bearer <ID_TOKEN>
+- Rails verifies token and provisions user (just-in-time) into internal DB
+- Rails then issues secure session cookie (preferred) OR uses bearer; default to session cookie.
+- Roles: superadmin, org_admin, staff, client_admin, client_user, subcontractor, readonly
+- Multi-tenant:
+  - organizations table
+  - memberships table linking users to orgs and roles
+  - all data scoped by org (server-side enforced)
+- Audit log table:
+  - login events
+  - role/org changes
+  - project access grants
+  - data export events
+
+OPENPROJECT DEPLOY REPO (MANDATORY)
+- Vanilla OpenProject deployment target = Cloud Run first. If OpenProject background jobs make this unsuitable, document a fallback path to GCE.
+- Use Cloud SQL Postgres for OpenProject DB.
+- Provide env vars + secret handling (Secret Manager).
+- Provide steps to create an OpenProject “integration user” and API token.
+
+OPENPROJECT INTEGRATION (MANDATORY)
+In Control Plane:
+- Table control_plane_projects with mapping to openproject_project_id
+- Project provisioning flow:
+  - create project in Control Plane -> create OpenProject project via API -> save mapping
+- Work packages:
+  - create/update OpenProject work packages for milestones/tickets as needed
+  - store only references by default (do not mirror everything unless needed)
+- Webhooks:
+  - endpoint /api/webhooks/openproject to receive events (work package updated, status changed)
+  - verify webhook signature if OpenProject supports; if not, restrict by secret + IP allowlist
+
+MODULES TO BUILD IN CONTROL PLANE (MANDATORY)
+ISP/MSP:
+- Sites/properties (isp_sites): name, address, geo, notes
+- Buildings/units (optional): building/unit identifiers
+- Network assets (network_assets): type (circuit, switch, ap, olt, ont, cpe, camera, nvr), vendor, model, serial, location, status
+- IP pools/VLANs
+- Tickets/incidents:
+  - SLA timers, priority, status, assignee, client-visible flag
+  - RCA template fields
+- Change requests:
+  - maintenance windows, approvals, rollback plan, impacted sites/assets
+Construction:
+- Construction packages / schedules:
+  - WBS templates
+  - milestones
+  - dependencies
+- Permits/inspections checklist
+- Procurement items:
+  - lead time, vendor, delivery date, status
+
+CLIENT PORTAL (MANDATORY)
+- Clients see only:
+  - shared projects
+  - agreed milestones (and statuses)
+  - tickets flagged client-visible
+  - approvals/signoffs
+- Client approvals workflow:
+  - approve milestone completion
+  - approve change window
+- Do NOT require clients to use OpenProject UI unless explicitly enabled per project.
+
+ENTERPRISE-LIKE CAPABILITIES (RECREATE IN CONTROL PLANE)
+Provide original implementations (distinct UX):
+- Portfolio rollups across projects
+- Baselines/snapshots of milestones/schedule
+- Advanced reports/dashboards (SLA compliance, schedule slip, workload)
+- Custom forms/workflows for change requests and inspections
+
+LOCAL DEV (MANDATORY)
+- docker-compose runs:
+  - control-plane rails
+  - control-plane postgres
+  - optional redis
+- Firebase emulator config for local dev
+- openproject local compose for testing integration
+
+CLOUD RUN + CLOUD BUILD (MANDATORY)
+For each repo:
+- cloudbuild.yaml builds container image and deploys to Cloud Run
+- Use Secret Manager for:
+  - DATABASE_URL
+  - RAILS_MASTER_KEY
+  - OPENPROJECT_API_TOKEN
+  - webhook secret
+- Use Cloud SQL connector
+- Provide exact gcloud commands
+
+REPLIT-SPECIFIC TASK
+Start by generating:
+1) A script or clear manual steps to split this Replit project into two folders:
+   - openproject-deploy/
+   - control-plane/
+2) Create GitHub-ready structure with clean commits.
+3) Update Control Plane Rails settings:
+   - port from ENV["PORT"] default 5000
+   - dev-only host/CSRF relaxation
+   - production hardening
+4) Add all files (Dockerfile, compose, cloudbuild, env examples, README) in-place.
+
+OUTPUT FORMAT (STRICT)
+Return:
+1) Repo trees for both repos
+2) File-by-file content blocks (so I can copy/paste)
+3) Step-by-step Replit commands to run locally (replit shell)
+4) Step-by-step GitHub push instructions
+5) Step-by-step GCP deploy instructions
+6) MVP roadmap + feature matrix
+
+Proceed immediately. Make best-practice assumptions if needed and state them, but do not ask questions unless truly blocking.
