@@ -1,6 +1,6 @@
 import {
   AuthService
-} from "./chunk-YO7BNKQC.js";
+} from "./chunk-7I4ADGVY.js";
 import {
   RouterLink,
   RouterLinkActive,
@@ -151,7 +151,7 @@ var AppComponent = class _AppComponent {
 // src/app/app.routes.ts
 var routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
-  { path: "login", loadComponent: () => import("./chunk-XHDFJ732.js").then((m) => m.LoginComponent) },
+  { path: "login", loadComponent: () => import("./chunk-DYRM4HCM.js").then((m) => m.LoginComponent) },
   { path: "dashboard", loadComponent: () => import("./chunk-I5XW5FC5.js").then((m) => m.DashboardComponent) },
   { path: "projects", loadComponent: () => import("./chunk-OADY73O4.js").then((m) => m.ProjectsComponent) },
   { path: "sites", loadComponent: () => import("./chunk-HR3735SM.js").then((m) => m.SitesComponent) },

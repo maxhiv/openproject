@@ -1,6 +1,6 @@
 import {
   AuthService
-} from "./chunk-YO7BNKQC.js";
+} from "./chunk-7I4ADGVY.js";
 import "./chunk-V7KC4D6S.js";
 import {
   ApplicationRef,
@@ -59,13 +59,10 @@ import {
   ɵɵdirectiveInject,
   ɵɵelementEnd,
   ɵɵelementStart,
-  ɵɵgetCurrentView,
   ɵɵgetInheritedFactory,
   ɵɵlistener,
   ɵɵnextContext,
   ɵɵproperty,
-  ɵɵresetView,
-  ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵtext,
   ɵɵtextInterpolate,
@@ -4700,56 +4697,16 @@ var ReactiveFormsModule = class _ReactiveFormsModule {
 })();
 
 // src/app/pages/login/login.component.ts
-function LoginComponent_div_11_p_9_Template(rf, ctx) {
+function LoginComponent_p_15_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "p", 11);
+    \u0275\u0275elementStart(0, "p", 8);
     \u0275\u0275text(1);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
+    const ctx_r0 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.error);
-  }
-}
-function LoginComponent_div_11_Template(rf, ctx) {
-  if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "div", 6)(1, "h3");
-    \u0275\u0275text(2, "Development Login");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(3, "div", 7)(4, "label");
-    \u0275\u0275text(5, "Email");
-    \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(6, "input", 8);
-    \u0275\u0275twoWayListener("ngModelChange", function LoginComponent_div_11_Template_input_ngModelChange_6_listener($event) {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      \u0275\u0275twoWayBindingSet(ctx_r1.devEmail, $event) || (ctx_r1.devEmail = $event);
-      return \u0275\u0275resetView($event);
-    });
-    \u0275\u0275elementEnd()();
-    \u0275\u0275elementStart(7, "button", 9);
-    \u0275\u0275listener("click", function LoginComponent_div_11_Template_button_click_7_listener() {
-      \u0275\u0275restoreView(_r1);
-      const ctx_r1 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r1.devLogin());
-    });
-    \u0275\u0275text(8);
-    \u0275\u0275elementEnd();
-    \u0275\u0275template(9, LoginComponent_div_11_p_9_Template, 2, 1, "p", 10);
-    \u0275\u0275elementEnd();
-  }
-  if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    \u0275\u0275advance(6);
-    \u0275\u0275twoWayProperty("ngModel", ctx_r1.devEmail);
-    \u0275\u0275advance();
-    \u0275\u0275property("disabled", ctx_r1.loading);
-    \u0275\u0275advance();
-    \u0275\u0275textInterpolate1(" ", ctx_r1.loading ? "Signing in..." : "Dev Sign In", " ");
-    \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.error);
+    \u0275\u0275textInterpolate(ctx_r0.error);
   }
 }
 var LoginComponent = class _LoginComponent {
@@ -4757,7 +4714,6 @@ var LoginComponent = class _LoginComponent {
   devEmail = "admin@example.com";
   loading = false;
   error = "";
-  isProduction = false;
   constructor(auth) {
     this.auth = auth;
   }
@@ -4766,9 +4722,9 @@ var LoginComponent = class _LoginComponent {
       this.loading = true;
       this.error = "";
       try {
-        yield this.auth.loginWithFirebase("dev-token-" + this.devEmail);
+        yield this.auth.devLogin(this.devEmail);
       } catch (e) {
-        this.error = e?.error?.error || "Login failed";
+        this.error = e?.error?.error || "Login failed. Please try again.";
       }
       this.loading = false;
     });
@@ -4776,7 +4732,7 @@ var LoginComponent = class _LoginComponent {
   static \u0275fac = function LoginComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _LoginComponent)(\u0275\u0275directiveInject(AuthService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 12, vars: 1, consts: [[1, "login-container"], [1, "login-card", "card"], [1, "subtitle"], [1, "login-info"], [1, "hint"], ["class", "dev-login", 4, "ngIf"], [1, "dev-login"], [1, "form-group"], ["type", "email", "placeholder", "admin@example.com", 3, "ngModelChange", "ngModel"], [1, "btn", "btn-primary", 3, "click", "disabled"], ["class", "error", 4, "ngIf"], [1, "error"]], template: function LoginComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 16, vars: 4, consts: [[1, "login-container"], [1, "login-card", "card"], [1, "subtitle"], [1, "dev-login"], [1, "form-group"], ["type", "email", "placeholder", "admin@example.com", 3, "ngModelChange", "ngModel"], [1, "btn", "btn-primary", 3, "click", "disabled"], ["class", "error", 4, "ngIf"], [1, "error"]], template: function LoginComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "h1");
       \u0275\u0275text(3, "Control Plane");
@@ -4784,20 +4740,38 @@ var LoginComponent = class _LoginComponent {
       \u0275\u0275elementStart(4, "p", 2);
       \u0275\u0275text(5, "ISP/MSP & Construction Management");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "div", 3)(7, "p");
-      \u0275\u0275text(8, "Sign in with Firebase Authentication");
+      \u0275\u0275elementStart(6, "div", 3)(7, "h3");
+      \u0275\u0275text(8, "Sign In");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(9, "p", 4);
-      \u0275\u0275text(10, "Configure FIREBASE_PROJECT_ID to enable login.");
+      \u0275\u0275elementStart(9, "div", 4)(10, "label");
+      \u0275\u0275text(11, "Email");
+      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(12, "input", 5);
+      \u0275\u0275twoWayListener("ngModelChange", function LoginComponent_Template_input_ngModelChange_12_listener($event) {
+        \u0275\u0275twoWayBindingSet(ctx.devEmail, $event) || (ctx.devEmail = $event);
+        return $event;
+      });
       \u0275\u0275elementEnd()();
-      \u0275\u0275template(11, LoginComponent_div_11_Template, 10, 4, "div", 5);
-      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(13, "button", 6);
+      \u0275\u0275listener("click", function LoginComponent_Template_button_click_13_listener() {
+        return ctx.devLogin();
+      });
+      \u0275\u0275text(14);
+      \u0275\u0275elementEnd();
+      \u0275\u0275template(15, LoginComponent_p_15_Template, 2, 1, "p", 7);
+      \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(11);
-      \u0275\u0275property("ngIf", !ctx.isProduction);
+      \u0275\u0275advance(12);
+      \u0275\u0275twoWayProperty("ngModel", ctx.devEmail);
+      \u0275\u0275advance();
+      \u0275\u0275property("disabled", ctx.loading);
+      \u0275\u0275advance();
+      \u0275\u0275textInterpolate1(" ", ctx.loading ? "Signing in..." : "Sign In", " ");
+      \u0275\u0275advance();
+      \u0275\u0275property("ngIf", ctx.error);
     }
-  }, dependencies: [CommonModule, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  background: var(--bg);\n}\n.login-card[_ngcontent-%COMP%] {\n  max-width: 400px;\n  width: 100%;\n  text-align: center;\n}\n.login-card[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 28px;\n  margin-bottom: 4px;\n}\n.subtitle[_ngcontent-%COMP%] {\n  color: var(--text-secondary);\n  margin-bottom: 24px;\n}\n.login-info[_ngcontent-%COMP%] {\n  margin: 20px 0;\n  padding: 16px;\n  background: #f1f3f4;\n  border-radius: 8px;\n}\n.hint[_ngcontent-%COMP%] {\n  font-size: 13px;\n  color: var(--text-secondary);\n  margin-top: 8px;\n}\n.dev-login[_ngcontent-%COMP%] {\n  margin-top: 24px;\n  padding-top: 24px;\n  border-top: 1px solid var(--border);\n  text-align: left;\n}\n.dev-login[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  font-size: 16px;\n  margin-bottom: 12px;\n}\n.error[_ngcontent-%COMP%] {\n  color: var(--danger);\n  font-size: 13px;\n  margin-top: 8px;\n}\nbutton[_ngcontent-%COMP%] {\n  width: 100%;\n  justify-content: center;\n}\n/*# sourceMappingURL=login.component.css.map */"] });
+  }, dependencies: [CommonModule, NgIf, FormsModule, DefaultValueAccessor, NgControlStatus, NgModel], styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  background: var(--bg);\n}\n.login-card[_ngcontent-%COMP%] {\n  max-width: 400px;\n  width: 100%;\n  text-align: center;\n}\n.login-card[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\n  font-size: 28px;\n  margin-bottom: 4px;\n}\n.subtitle[_ngcontent-%COMP%] {\n  color: var(--text-secondary);\n  margin-bottom: 24px;\n}\n.dev-login[_ngcontent-%COMP%] {\n  margin-top: 24px;\n  text-align: left;\n}\n.dev-login[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  font-size: 16px;\n  margin-bottom: 12px;\n  text-align: center;\n}\n.error[_ngcontent-%COMP%] {\n  color: var(--danger);\n  font-size: 13px;\n  margin-top: 8px;\n}\nbutton[_ngcontent-%COMP%] {\n  width: 100%;\n  justify-content: center;\n}\n/*# sourceMappingURL=login.component.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LoginComponent, [{
@@ -4808,29 +4782,24 @@ var LoginComponent = class _LoginComponent {
         <h1>Control Plane</h1>
         <p class="subtitle">ISP/MSP & Construction Management</p>
 
-        <div class="login-info">
-          <p>Sign in with Firebase Authentication</p>
-          <p class="hint">Configure FIREBASE_PROJECT_ID to enable login.</p>
-        </div>
-
-        <div class="dev-login" *ngIf="!isProduction">
-          <h3>Development Login</h3>
+        <div class="dev-login">
+          <h3>Sign In</h3>
           <div class="form-group">
             <label>Email</label>
             <input type="email" [(ngModel)]="devEmail" placeholder="admin@example.com">
           </div>
           <button class="btn btn-primary" (click)="devLogin()" [disabled]="loading">
-            {{ loading ? 'Signing in...' : 'Dev Sign In' }}
+            {{ loading ? 'Signing in...' : 'Sign In' }}
           </button>
           <p class="error" *ngIf="error">{{ error }}</p>
         </div>
       </div>
     </div>
-  `, styles: ["/* angular:styles/component:css;6b78a95355107b8be1685aaeeaf5c03672f0b7fdc3bf23252a821318534dbd7d;/home/runner/workspace/control-plane/frontend/src/app/pages/login/login.component.ts */\n.login-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  background: var(--bg);\n}\n.login-card {\n  max-width: 400px;\n  width: 100%;\n  text-align: center;\n}\n.login-card h1 {\n  font-size: 28px;\n  margin-bottom: 4px;\n}\n.subtitle {\n  color: var(--text-secondary);\n  margin-bottom: 24px;\n}\n.login-info {\n  margin: 20px 0;\n  padding: 16px;\n  background: #f1f3f4;\n  border-radius: 8px;\n}\n.hint {\n  font-size: 13px;\n  color: var(--text-secondary);\n  margin-top: 8px;\n}\n.dev-login {\n  margin-top: 24px;\n  padding-top: 24px;\n  border-top: 1px solid var(--border);\n  text-align: left;\n}\n.dev-login h3 {\n  font-size: 16px;\n  margin-bottom: 12px;\n}\n.error {\n  color: var(--danger);\n  font-size: 13px;\n  margin-top: 8px;\n}\nbutton {\n  width: 100%;\n  justify-content: center;\n}\n/*# sourceMappingURL=login.component.css.map */\n"] }]
+  `, styles: ["/* angular:styles/component:css;8c456f72b1ff48722f900d1c46488d164949c8b105a732518ead3957776a5610;/home/runner/workspace/control-plane/frontend/src/app/pages/login/login.component.ts */\n.login-container {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  background: var(--bg);\n}\n.login-card {\n  max-width: 400px;\n  width: 100%;\n  text-align: center;\n}\n.login-card h1 {\n  font-size: 28px;\n  margin-bottom: 4px;\n}\n.subtitle {\n  color: var(--text-secondary);\n  margin-bottom: 24px;\n}\n.dev-login {\n  margin-top: 24px;\n  text-align: left;\n}\n.dev-login h3 {\n  font-size: 16px;\n  margin-bottom: 12px;\n  text-align: center;\n}\n.error {\n  color: var(--danger);\n  font-size: 13px;\n  margin-top: 8px;\n}\nbutton {\n  width: 100%;\n  justify-content: center;\n}\n/*# sourceMappingURL=login.component.css.map */\n"] }]
   }], () => [{ type: AuthService }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/pages/login/login.component.ts", lineNumber: 51 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(LoginComponent, { className: "LoginComponent", filePath: "src/app/pages/login/login.component.ts", lineNumber: 44 });
 })();
 export {
   LoginComponent
@@ -4844,4 +4813,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-XHDFJ732.js.map
+//# sourceMappingURL=chunk-DYRM4HCM.js.map

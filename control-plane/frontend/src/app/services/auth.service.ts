@@ -23,21 +23,29 @@ export class AuthService {
 
   isLoggedIn() { return this._isLoggedIn(); }
 
+  async devLogin(email: string): Promise<void> {
+    const res = await this.http.post<{ user: UserInfo }>(
+      `${environment.apiUrl}/api/dev_login`,
+      { email },
+      { withCredentials: true }
+    ).toPromise();
+    if (res?.user) {
+      this.currentUser.set(res.user);
+      this._isLoggedIn.set(true);
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
   async loginWithFirebase(idToken: string): Promise<void> {
-    try {
-      const res = await this.http.post<{ user: UserInfo }>(
-        `${environment.apiUrl}/api/session`,
-        {},
-        { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true }
-      ).toPromise();
-      if (res?.user) {
-        this.currentUser.set(res.user);
-        this._isLoggedIn.set(true);
-        this.router.navigate(['/dashboard']);
-      }
-    } catch (err) {
-      console.error('Login failed', err);
-      throw err;
+    const res = await this.http.post<{ user: UserInfo }>(
+      `${environment.apiUrl}/api/session`,
+      {},
+      { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true }
+    ).toPromise();
+    if (res?.user) {
+      this.currentUser.set(res.user);
+      this._isLoggedIn.set(true);
+      this.router.navigate(['/dashboard']);
     }
   }
 

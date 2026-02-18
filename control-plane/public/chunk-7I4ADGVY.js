@@ -26,18 +26,23 @@ var AuthService = class _AuthService {
   isLoggedIn() {
     return this._isLoggedIn();
   }
+  devLogin(email) {
+    return __async(this, null, function* () {
+      const res = yield this.http.post(`${environment.apiUrl}/api/dev_login`, { email }, { withCredentials: true }).toPromise();
+      if (res?.user) {
+        this.currentUser.set(res.user);
+        this._isLoggedIn.set(true);
+        this.router.navigate(["/dashboard"]);
+      }
+    });
+  }
   loginWithFirebase(idToken) {
     return __async(this, null, function* () {
-      try {
-        const res = yield this.http.post(`${environment.apiUrl}/api/session`, {}, { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true }).toPromise();
-        if (res?.user) {
-          this.currentUser.set(res.user);
-          this._isLoggedIn.set(true);
-          this.router.navigate(["/dashboard"]);
-        }
-      } catch (err) {
-        console.error("Login failed", err);
-        throw err;
+      const res = yield this.http.post(`${environment.apiUrl}/api/session`, {}, { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true }).toPromise();
+      if (res?.user) {
+        this.currentUser.set(res.user);
+        this._isLoggedIn.set(true);
+        this.router.navigate(["/dashboard"]);
       }
     });
   }
@@ -80,4 +85,4 @@ var AuthService = class _AuthService {
 export {
   AuthService
 };
-//# sourceMappingURL=chunk-YO7BNKQC.js.map
+//# sourceMappingURL=chunk-7I4ADGVY.js.map

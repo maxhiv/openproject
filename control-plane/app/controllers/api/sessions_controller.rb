@@ -1,6 +1,6 @@
 module Api
   class SessionsController < BaseController
-    skip_before_action :authenticate_user!, only: [:create]
+    skip_before_action :authenticate_user!, only: [:create, :dev_login]
     skip_before_action :set_current_organization
 
     def create
@@ -19,6 +19,37 @@ module Api
       else
         user.update(last_login_at: Time.current)
         audit_login(user, "login")
+      end
+
+      session[:user_id] = user.id
+      render json: { user: user_json(user) }, status: :ok
+    end
+
+    def dev_login
+      raise Api::Forbidden, "Dev login only available in development" unless Rails.env.development?
+
+      email = params[:email].presence || "admin@example.com"
+      display_name = params[:display_name].presence || email.split("@").first
+
+      user = User.find_or_initialize_by(email: email)
+      if user.new_record?
+        user.display_name = display_name
+        user.firebase_uid = "dev-#{SecureRandom.hex(8)}"
+        user.superadmin = true
+        user.save!
+
+        org = Organization.find_or_create_by!(name: "Demo Organization") do |o|
+          o.slug = "demo-org"
+          o.plan = "pro"
+        end
+        Membership.find_or_create_by!(user: user, organization: org) do |m|
+          m.role = "org_admin"
+        end
+
+        audit_login(user, "dev_user_provisioned")
+      else
+        user.update(last_login_at: Time.current)
+        audit_login(user, "dev_login")
       end
 
       session[:user_id] = user.id

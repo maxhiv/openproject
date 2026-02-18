@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     post "session", to: "sessions#create"
+    post "dev_login", to: "sessions#dev_login"
     delete "session", to: "sessions#destroy"
     get "me", to: "sessions#me"
 

@@ -13,19 +13,14 @@ import { AuthService } from '../../services/auth.service';
         <h1>Control Plane</h1>
         <p class="subtitle">ISP/MSP & Construction Management</p>
 
-        <div class="login-info">
-          <p>Sign in with Firebase Authentication</p>
-          <p class="hint">Configure FIREBASE_PROJECT_ID to enable login.</p>
-        </div>
-
-        <div class="dev-login" *ngIf="!isProduction">
-          <h3>Development Login</h3>
+        <div class="dev-login">
+          <h3>Sign In</h3>
           <div class="form-group">
             <label>Email</label>
             <input type="email" [(ngModel)]="devEmail" placeholder="admin@example.com">
           </div>
           <button class="btn btn-primary" (click)="devLogin()" [disabled]="loading">
-            {{ loading ? 'Signing in...' : 'Dev Sign In' }}
+            {{ loading ? 'Signing in...' : 'Sign In' }}
           </button>
           <p class="error" *ngIf="error">{{ error }}</p>
         </div>
@@ -40,10 +35,8 @@ import { AuthService } from '../../services/auth.service';
     .login-card { max-width: 400px; width: 100%; text-align: center; }
     .login-card h1 { font-size: 28px; margin-bottom: 4px; }
     .subtitle { color: var(--text-secondary); margin-bottom: 24px; }
-    .login-info { margin: 20px 0; padding: 16px; background: #f1f3f4; border-radius: 8px; }
-    .hint { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
-    .dev-login { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); text-align: left; }
-    .dev-login h3 { font-size: 16px; margin-bottom: 12px; }
+    .dev-login { margin-top: 24px; text-align: left; }
+    .dev-login h3 { font-size: 16px; margin-bottom: 12px; text-align: center; }
     .error { color: var(--danger); font-size: 13px; margin-top: 8px; }
     button { width: 100%; justify-content: center; }
   `]
@@ -52,7 +45,6 @@ export class LoginComponent {
   devEmail = 'admin@example.com';
   loading = false;
   error = '';
-  isProduction = false;
 
   constructor(private auth: AuthService) {}
 
@@ -60,9 +52,9 @@ export class LoginComponent {
     this.loading = true;
     this.error = '';
     try {
-      await this.auth.loginWithFirebase('dev-token-' + this.devEmail);
+      await this.auth.devLogin(this.devEmail);
     } catch (e: any) {
-      this.error = e?.error?.error || 'Login failed';
+      this.error = e?.error?.error || 'Login failed. Please try again.';
     }
     this.loading = false;
   }
