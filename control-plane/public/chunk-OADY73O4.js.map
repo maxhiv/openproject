@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/projects/projects.component.ts"],
+  "sourcesContent": ["import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-projects',\n  standalone: true,\n  imports: [CommonModule],\n  template: `<div><h1>Projects</h1><p>Project management coming soon.</p></div>`\n})\nexport class ProjectsComponent {}\n"],
+  "mappings": ";;;;;;;;;;;;AASM,IAAO,oBAAP,MAAO,mBAAiB;;qCAAjB,oBAAiB;EAAA;yEAAjB,oBAAiB,WAAA,CAAA,CAAA,cAAA,CAAA,GAAA,OAAA,GAAA,MAAA,GAAA,UAAA,SAAA,2BAAA,IAAA,KAAA;AAAA,QAAA,KAAA,GAAA;AAFjB,MAAA,4BAAA,GAAA,KAAA,EAAK,GAAA,IAAA;AAAI,MAAA,iBAAA,GAAA,UAAA;AAAQ,MAAA,0BAAA;AAAK,MAAA,4BAAA,GAAA,GAAA;AAAG,MAAA,iBAAA,GAAA,iCAAA;AAA+B,MAAA,0BAAA,EAAI;;oBAD7D,YAAY,GAAA,eAAA,EAAA,CAAA;;;sEAGX,mBAAiB,CAAA;UAN7B;WAAU;MACT,UAAU;MACV,YAAY;MACZ,SAAS,CAAC,YAAY;MACtB,UAAU;KACX;;;;6EACY,mBAAiB,EAAA,WAAA,qBAAA,UAAA,gDAAA,YAAA,GAAA,CAAA;AAAA,GAAA;",
+  "names": []
+}

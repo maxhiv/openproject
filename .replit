@@ -39,29 +39,29 @@ args = "Control Plane"
 name = "Start application"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd /home/runner/workspace && bundle exec rails server -b 0.0.0.0 -p 5000"
-waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
+args = "cd /home/runner/workspace && bundle exec rails server -b 0.0.0.0 -p 3000"
+waitForPort = 3000
 
 [[workflows.workflow]]
 name = "Control Plane"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd /home/runner/workspace/control-plane && CONTROL_PLANE_DATABASE_URL=\"postgresql://postgres:password@helium/control_plane_dev?sslmode=disable\" bundle exec rails server -b 0.0.0.0 -p 3000"
-waitForPort = 3000
-
-[workflows.workflow.metadata]
-outputType = "console"
+args = "cd /home/runner/workspace/control-plane && CONTROL_PLANE_DATABASE_URL=\"postgresql://postgres:password@helium/control_plane_dev?sslmode=disable\" bundle exec rails server -b 0.0.0.0 -p 5000"
+waitForPort = 5000
 
 [[ports]]
 localPort = 3000
-externalPort = 3001
+externalPort = 3000
 
 [[ports]]
 localPort = 5000

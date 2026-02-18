@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/portal/portal.component.ts"],
+  "sourcesContent": ["import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-portal',\n  standalone: true,\n  imports: [CommonModule],\n  template: `<div><h1>Client Portal</h1><p>Client portal view coming soon.</p></div>`\n})\nexport class PortalComponent {}\n"],
+  "mappings": ";;;;;;;;;;;;AASM,IAAO,kBAAP,MAAO,iBAAe;;qCAAf,kBAAe;EAAA;yEAAf,kBAAe,WAAA,CAAA,CAAA,YAAA,CAAA,GAAA,OAAA,GAAA,MAAA,GAAA,UAAA,SAAA,yBAAA,IAAA,KAAA;AAAA,QAAA,KAAA,GAAA;AAFf,MAAA,4BAAA,GAAA,KAAA,EAAK,GAAA,IAAA;AAAI,MAAA,iBAAA,GAAA,eAAA;AAAa,MAAA,0BAAA;AAAK,MAAA,4BAAA,GAAA,GAAA;AAAG,MAAA,iBAAA,GAAA,iCAAA;AAA+B,MAAA,0BAAA,EAAI;;oBADlE,YAAY,GAAA,eAAA,EAAA,CAAA;;;sEAGX,iBAAe,CAAA;UAN3B;WAAU;MACT,UAAU;MACV,YAAY;MACZ,SAAS,CAAC,YAAY;MACtB,UAAU;KACX;;;;6EACY,iBAAe,EAAA,WAAA,mBAAA,UAAA,4CAAA,YAAA,GAAA,CAAA;AAAA,GAAA;",
+  "names": []
+}

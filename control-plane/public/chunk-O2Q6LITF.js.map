@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/network-assets/network-assets.component.ts"],
+  "sourcesContent": ["import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'app-network-assets',\n  standalone: true,\n  imports: [CommonModule],\n  template: `<div><h1>Network Assets</h1><p>Network asset inventory coming soon.</p></div>`\n})\nexport class NetworkAssetsComponent {}\n"],
+  "mappings": ";;;;;;;;;;;;AASM,IAAO,yBAAP,MAAO,wBAAsB;;qCAAtB,yBAAsB;EAAA;yEAAtB,yBAAsB,WAAA,CAAA,CAAA,oBAAA,CAAA,GAAA,OAAA,GAAA,MAAA,GAAA,UAAA,SAAA,gCAAA,IAAA,KAAA;AAAA,QAAA,KAAA,GAAA;AAFtB,MAAA,4BAAA,GAAA,KAAA,EAAK,GAAA,IAAA;AAAI,MAAA,iBAAA,GAAA,gBAAA;AAAc,MAAA,0BAAA;AAAK,MAAA,4BAAA,GAAA,GAAA;AAAG,MAAA,iBAAA,GAAA,sCAAA;AAAoC,MAAA,0BAAA,EAAI;;oBADxE,YAAY,GAAA,eAAA,EAAA,CAAA;;;sEAGX,wBAAsB,CAAA;UANlC;WAAU;MACT,UAAU;MACV,YAAY;MACZ,SAAS,CAAC,YAAY;MACtB,UAAU;KACX;;;;6EACY,wBAAsB,EAAA,WAAA,0BAAA,UAAA,4DAAA,YAAA,GAAA,CAAA;AAAA,GAAA;",
+  "names": []
+}
