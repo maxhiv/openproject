@@ -1,7 +1,7 @@
 # OpenProject
 
 ## Overview
-OpenProject project management platform with enterprise/premium features hidden.
+OpenProject project management platform with all enterprise features unlocked.
 ISP/MSP and Construction management use case.
 
 ## Architecture
@@ -37,6 +37,15 @@ bundle exec rails server -b 0.0.0.0 -p 5000
 - Username: admin
 - Password: admin
 
+## Enterprise Feature Unlock
+- `config/initializers/enterprise_unlock.rb` overrides `EnterpriseToken` class methods
+- `allows_to?` always returns true (unlocks all 25 enterprise features)
+- `active?` always returns true (treats enterprise as active)
+- `hide_banners?` always returns true (suppresses all upgrade prompts)
+- `available_features` returns full feature set for frontend
+- `trialling_features` returns empty set (no trial banners)
+- No actual enterprise token needed
+
 ## Recent Changes
 - 2026-02-18: Initial Replit setup for OpenProject
 - 2026-02-18: Fixed OpenProject login/CSRF and host configuration
@@ -45,6 +54,10 @@ bundle exec rails server -b 0.0.0.0 -p 5000
   - Set OPENPROJECT_EE__HIDE__BANNERS=true to hide enterprise banners
   - Switched primary workflow to OpenProject on port 5000
   - Removed Control Plane workflow
+- 2026-02-18: Full enterprise feature unlock via initializer
+  - All 25 enterprise features unlocked (boards, team planner, baselines, etc.)
+  - All upgrade banners and trial prompts suppressed
+  - Frontend receives full feature list via configuration API
 
 ## User Preferences
 - Use OpenProject directly instead of separate Control Plane
