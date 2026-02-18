@@ -56,7 +56,7 @@ module Accounts::RedirectAfterLogin
     if (url = Setting.after_first_login_redirect_url)
       redirect_back_or_default url
     else
-      redirect_back_or_default home_url(first_time_user: true)
+      redirect_back_or_default home_path(first_time_user: true)
     end
   end
 end
