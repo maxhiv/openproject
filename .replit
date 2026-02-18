@@ -43,3 +43,8 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["bash", "-c", "cd /home/runner/workspace && bundle exec rails server -b 0.0.0.0 -p 5000 -e production"]
+build = ["bash", "-c", "cd /home/runner/workspace/frontend && npm install && npm run build && cd /home/runner/workspace && bundle exec rails runner 'OpenProject::Assets.rebuild_manifest!'"]
