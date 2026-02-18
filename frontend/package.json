@@ -179,6 +179,7 @@
     "typedjson": "^1.5.1",
     "urijs": "^1.19.11",
     "uuid": "^13.0.0",
+    "yargs": "^18.0.0",
     "zone.js": "~0.15.1"
   },
   "optionalDependencies": {

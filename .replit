@@ -1,0 +1,45 @@
+modules = ["web", "bash", "nodejs-22", "postgresql-16", "ruby-4.0"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["pkg-config", "libxml2", "libxslt", "imagemagick", "shared-mime-info", "zlib", "openssl", "libyaml", "libffi", "cmake", "gcc"]
+
+[userenv]
+
+[userenv.shared]
+RAILS_ENV = "development"
+PORT = "5000"
+HOST = "0.0.0.0"
+SILENCE_SQL_LOGS = "true"
+SECRET_KEY_BASE = "a_dev_secret_key_base_that_is_at_least_64_bytes_long_for_openproject_replit_setup_1234567890"
+OPENPROJECT_DISABLE_DEV_ASSET_PROXY = "true"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd /home/runner/workspace && bundle exec rails server -b 0.0.0.0 -p 5000"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
