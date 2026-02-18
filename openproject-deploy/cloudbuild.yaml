@@ -1,0 +1,33 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/openproject:$COMMIT_SHA', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/openproject:$COMMIT_SHA']
+
+  # NOTE: OpenProject with background workers may be better suited for GCE.
+  # Cloud Run deployment provided as starting point; switch to GCE if needed.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'openproject'
+      - '--image=gcr.io/$PROJECT_ID/openproject:$COMMIT_SHA'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=8080'
+      - '--memory=2Gi'
+      - '--cpu=2'
+      - '--min-instances=1'
+      - '--max-instances=3'
+      - '--timeout=600'
+      - '--set-env-vars=RAILS_ENV=production,OPENPROJECT_HTTPS=true'
+      - '--set-secrets=DATABASE_URL=openproject-database-url:latest,OPENPROJECT_SECRET__KEY__BASE=openproject-secret-key:latest'
+
+images:
+  - 'gcr.io/$PROJECT_ID/openproject:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

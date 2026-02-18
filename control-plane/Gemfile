@@ -1,0 +1,32 @@
+source "https://rubygems.org"
+
+ruby "~> 4.0"
+
+gem "rails", "~> 8.1.2"
+gem "pg", "~> 1.5"
+gem "puma", "~> 6.0"
+gem "sprockets-rails"
+gem "jbuilder"
+gem "bootsnap", require: false
+gem "rack-cors"
+
+# Firebase Auth
+gem "jwt"
+gem "net-http"
+
+# OpenProject API client
+gem "faraday"
+gem "faraday-retry"
+
+# Background jobs
+gem "solid_queue"
+
+group :development do
+  gem "web-console"
+  gem "debug", platforms: %i[mri]
+end
+
+group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
+end

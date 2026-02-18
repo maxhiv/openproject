@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  openproject:
+    image: openproject/openproject:15
+    ports:
+      - "8080:80"
+    environment:
+      OPENPROJECT_SECRET__KEY__BASE: ${SECRET_KEY_BASE:-secret}
+      OPENPROJECT_HOST__NAME: ${OPENPROJECT_HOST:-localhost:8080}
+      OPENPROJECT_HTTPS: "false"
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/openproject
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - op_data:/var/openproject/assets
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: openproject
+    ports:
+      - "5434:5432"
+    volumes:
+      - op_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  op_data:
+  op_pgdata:
